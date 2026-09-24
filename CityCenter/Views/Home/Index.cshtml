@@ -1,0 +1,199 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+    ViewData["HomePage"] = true;
+}
+
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" style="background-color: #dadfe8;">
+            <div class="container text-dark py-3 py-md-4">
+                <div class="row align-items-center g-3 g-md-5">
+                    <div class="col-md-6 text-center text-md-start">
+                        <h1 class="mb-3 mb-md-5 fs-2 fs-md-1 display-md-4 text-dark"><strong>City Center Electronics</strong></h1>
+                        <p class="d-none d-sm-block">
+                            Everything you need in tech, from the brands you love. Top quality, latest tech, all under one roof.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="ratio ratio-1x1 w-50 w-md-75 mx-auto">
+                            <img src="/images/hero1.png" class="rounded-3" style="object-fit: cover;" alt="hero1" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item" style="background-color:#dadfe8;">
+            <div class="container text-dark py-3 py-md-4">
+                <div class="row align-items-center g-3 g-md-5">
+                    <div class="col-md-6 text-center text-md-start">
+                        <h1 class="mb-3 mb-md-5 fs-2 fs-md-1 display-md-4 text-dark"><strong>Big Deals, Every Day</strong></h1>
+                        <p class="d-none d-sm-block">
+                            Discover exclusive discounts on laptops, phones, and accessories, refreshed weekly just for you.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="ratio ratio-1x1 w-50 w-md-75 mx-auto">
+                            <img src="/images/hero2.png" class="rounded-3" style="object-fit: cover;" alt="hero2" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-item" style="background-color: #dadfe8;">
+            <div class="container text-dark py-3 py-md-4">
+                <div class="row align-items-center g-3 g-md-5">
+                    <div class="col-md-6 text-center text-md-start">
+                        <h1 class="mb-3 mb-md-5 fs-2 fs-md-1 display-md-4 text-dark"><strong>Fast, Free Shipping</strong></h1>
+                        <p class="d-none d-sm-block">
+                            Get your order delivered quickly with our reliable nationwide shipping on every purchase.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="ratio ratio-1x1 w-50 w-md-75 mx-auto">
+                            <img src="/images/hero3.png" class="rounded-3" style="object-fit: contain;" alt="hero3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+<div class="container py-4">
+    <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
+        <div class="col">
+            <i class="bi bi-truck fs-3 text-warning d-block mb-1"></i>
+            <small class="text-secondary">Fast Delivery</small>
+        </div>
+        <div class="col">
+            <i class="bi bi-shield-check fs-3 text-warning d-block mb-1"></i>
+            <small class="text-secondary">1-Year Warranty</small>
+        </div>
+        <div class="col">
+            <i class="bi bi-arrow-repeat fs-3 text-warning d-block mb-1"></i>
+            <small class="text-secondary">Easy Returns</small>
+        </div>
+        <div class="col">
+            <i class="bi bi-lock fs-3 text-warning d-block mb-1"></i>
+            <small class="text-secondary">Secure Checkout</small>
+        </div>
+    </div>
+</div>
+
+ 
+<div class="container py-4">
+    <h2 class="text-center pb-4">Shop by Category</h2>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3 text-center">
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Phones" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-phone fs-2 text-warning d-block mb-2"></i>
+                    Phones
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Computers" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-laptop fs-2 text-warning d-block mb-2"></i>
+                    Computers
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Accessories" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-earbuds fs-2 text-warning d-block mb-2"></i>
+                    Accessories
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Printers" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-printer fs-2 text-warning d-block mb-2"></i>
+                    Printers
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Cameras" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-camera fs-2 text-warning d-block mb-2"></i>
+                    Cameras
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Other" class="text-decoration-none text-dark">
+                <div class="border rounded-4 p-3 h-100">
+                    <i class="bi bi-grid fs-2 text-warning d-block mb-2"></i>
+                    Other
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="bg-light">
+    <div class="container py-3">
+        <h2 class="pb-4 text-center">Latest Products</h2>
+
+        <div class="row mb-5 g-3">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm rounded-4 h-100">
+                        <div class="p-3 text-center">
+                            <img src="/products/@product.ImageFileName" class="img-fluid" alt="@product.Name"
+                                 style="height: 180px; object-fit: contain" />
+                        </div>
+                        <div class="card-body text-center d-flex flex-column">
+                            <span class="badge rounded-pill bg-light text-dark border px-3 py-2 mb-2 
+                              align-self-center fw-normal">
+                                @product.Brand · @product.Category
+                            </span>
+                            <h5 class="fs-6 fw-normal mb-1 text-dark">@product.Name</h5>
+                            <h4 class="fs-5 fw-medium  text-dark mb-2">@(product.Price)$</h4>
+                            <div class="d-flex gap-2 mt-auto">
+                                <a class="btn btn-outline-dark btn-sm text-dark soft-hover flex-fill" asp-controller="Store"
+                                   asp-action="Details" asp-route-id="@product.Id" role="button">Details</a>
+                                <button type="button" class="btn btn-dark btn-sm text-white flex-fill" onclick="addToCart(this, @product.Id)">
+                                    Add to Cart <i class="bi bi-cart4"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="promo container my-1">
+    <div class="position-relative rounded-4 overflow-hidden" style="height: 200px;">
+        <img src="/images/about444.jpg" alt="promo" class="w-100 h-100" style="object-fit:cover; object-position: center;" />
+        <div class="position-absolute top-0 start-0 h-100 d-flex flex-column justify-content-center  ps-3 ps-md-5">
+            <h3 class="text-black fw-bold mb-2">Big Savings on Laptops </h3>
+            <p class="text-black mb-3 d-none d-md-block">Up to 30% off top brands, this week only.</p> 
+            <a asp-controller="Store" asp-action="Index" asp-route-category="Computers" class=" shopNow btn btn-warning fw-semibold px-4 rounded-pill align-self-start">Shop Now</a>
+        </div>
+    </div>
+</div>
+ 
+

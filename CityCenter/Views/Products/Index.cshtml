@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNetCore.Html;
+@model List<Product>
+@{
+    int pageIndex = (int)ViewData["PageIndex"]!;
+    int totalPages = (int)ViewData["TotalPages"]!;
+
+    string search = (string)ViewData["Search"]!;
+
+    string column = (string)ViewData["Column"]!;
+    string orderBy = (string)ViewData["OrderBy"]!;
+
+    HtmlString getArrow(string tableColumn)
+    {
+        if (tableColumn != column) return new HtmlString("");
+
+        if (orderBy == "desc")
+        {
+            return new HtmlString("<i class='bi bi-arrow-down'></i>");
+        }
+
+        return new HtmlString("<i class='bi bi-arrow-up'></i>");
+    }
+}
+
+
+<h2 class="text-center mb-5 fw-bold text-dark">List of Products</h2>
+
+<div class="row mb-4 g-3 align-items-center">
+    <div class="col-12 col-md-auto">
+        <a class="btn btn-dark rounded-3" asp-controller="Products" asp-action="Create">
+            <i class="bi bi-plus-lg"></i> New Product
+        </a>
+    </div>
+    <div class="col-12 col-md">
+        <form class="d-flex" role="search">
+            <input class="form-control rounded-3 me-2" type="search" name="search" value="@search" placeholder="Search by Name or Brand" aria-label="Search">
+            <button class="btn btn-outline-dark rounded-3" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function sortTable(column) {
+        let orderBy = "desc"
+        let currentColumn = "@column";
+        let currentOrder = "@orderBy";
+        if (column === currentColumn) {
+            if (currentOrder == "asc") orderBy = "desc";
+            else orderBy = "asc";
+        }
+        window.location.href = "?search=@(search)&column=" + column + "&orderBy=" + orderBy
+    }
+</script>
+
+<div class="card border rounded-4 shadow-sm">
+    <div class="table-responsive rounded-4">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr class="text-muted small text-uppercase bg-light">
+                    <th class="ps-4 py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('Id')">ID @getArrow("Id")</th>
+                    <th class="py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('Name')">Name @getArrow("Name")</th>
+                    <th class="py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('Brand')">Brand @getArrow("Brand")</th>
+                    <th class="py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('Category')">Category @getArrow("Category")</th>
+                    <th class="py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('Price')">Price @getArrow("Price")</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Image</th>
+                    <th class="py-3 fw-semibold border-0" style="cursor: pointer; letter-spacing: 0.4px;" onclick="sortTable('CreatedAt')">Created At @getArrow("CreatedAt")</th>
+                    <th class="text-end pe-4 py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+                {
+                    <tr>
+                        <td class="ps-4 py-3 fw-medium">#@product.Id</td>
+                        <td>@product.Name</td>
+                        <td class="text-secondary">@product.Brand</td>
+                        <td class="text-secondary">@product.Category</td>
+                        <td class="fw-semibold">@(product.Price)$</td>
+                        <td>
+                            <img src="/products/@product.ImageFileName" class="rounded-3 border" style="width: 64px; height: 64px; object-fit: contain;" alt="@product.Name" />
+                        </td>
+                        <td class="text-nowrap text-secondary">@product.CreatedAt.ToString("MM/dd/yyyy")</td>
+                        <td class="text-end pe-4 py-3" style="white-space:nowrap">
+                            <a class="btn btn-outline-dark btn-sm rounded-3" asp-controller="Products" asp-action="Edit"
+                               asp-route-id="@product.Id">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm rounded-3" asp-controller="Products" asp-action="Delete"
+                               asp-route-id="@product.Id" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<nav class="mt-4">
+    <ul class="pagination justify-content-center flex-wrap">
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            string active = "";
+            string linkClass = "border border-dark text-dark";
+            if (i == pageIndex)
+            {
+                active = "active";
+                linkClass = "border border-dark bg-dark text-white";
+            }
+            <li class="page-item @active">
+                <a class="page-link rounded-3 mx-1 @linkClass" asp-route-pageIndex="@i"
+                   asp-route-search="@search" asp-route-column="@column" asp-route-orderBy="@orderBy">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

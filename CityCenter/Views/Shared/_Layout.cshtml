@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="City Center Electronics — your one-stop shop for laptops, smartphones, cameras, and accessories from trusted brands." />
+    <title>City Center</title>
+    <link rel="icon" href="/images/icon2.png" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CityCenter.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <script>
+            function getShoppingCart() {
+               
+                const cookieName = "shopping_cart";
+                let cookiesArray = document.cookie.split(';');
+
+                for (let i = 0; i < cookiesArray.length; i++) {
+                    let cookie = cookiesArray[i];
+                    if (cookie.includes(cookieName)) {
+                        let cookie_value = cookie.substring(cookie.indexOf("=") + 1);
+
+                        try {
+                            let cart = JSON.parse(atob(cookie_value));
+                            return cart;
+                        }
+                        catch (exception) {
+                            break;
+                        }
+                    }
+                }
+
+                return {};
+            }
+
+
+            function saveCart(cart) {
+                let cartStr = btoa(JSON.stringify(cart))
+
+                 
+                let d = new Date();
+                d.setDate(d.getDate() + 365);  
+                let expires = d.toUTCString();
+                document.cookie = "shopping_cart=" + cartStr + ";expires=" + expires + ";path=/; SameSite=Strict; Secure";
+            }
+
+
+
+            function addToCart(button, id) {
+                let cart = getShoppingCart();
+
+                let quantity = cart[id]
+                if (isNaN(quantity)) {
+                     
+                    cart[id] = 1
+                }
+                else {
+                    cart[id] = Number(quantity) + 1;
+                }
+
+                saveCart(cart);
+
+                     var toastEl = document.getElementById('cartToast');
+                     var toast = new bootstrap.Toast(toastEl);
+                     toast.show();
+
+
+
+
+                button.innerHTML = "Added <i class='bi bi-check-lg'></i>";
+
+                let cartSize = 0;
+                for (var cartItem of Object.entries(cart)) {
+                    quantity = cartItem[1]
+                    if (isNaN(quantity)) continue;
+
+                    cartSize += Number(quantity)
+                }
+
+                document.getElementById("CartSize").innerHTML = cartSize
+            }
+
+
+            function increase(id) {
+                let cart = getShoppingCart();
+
+                let quantity = cart[id]
+                if (isNaN(quantity)) {
+                     
+                    cart[id] = 1
+                }
+                else {
+                    cart[id] = Number(quantity) + 1;
+                }
+
+                saveCart(cart);
+                location.reload()
+            }
+
+            function decrease(id) {
+                let cart = getShoppingCart();
+
+                let quantity = cart[id]
+                if (isNaN(quantity)) {
+                     
+                    return
+                }
+
+                quantity = Number(quantity)
+
+                if (quantity > 1) {
+                    cart[id] = quantity - 1
+                    saveCart(cart)
+                    location.reload()
+                }
+            }
+
+            function remove(id) {
+                let cart = getShoppingCart();
+
+                if (cart[id]) {
+                    delete cart[id]
+                    saveCart(cart)
+                    location.reload()
+                }
+            }
+
+            </script>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow py-1">
+            <div class="container">
+                <a class="navbar-brand py-0 d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/icon2.png" alt="..." width="20" class="me-2" />City Center
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark py-1" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark py-1" asp-area="" asp-controller="Store" asp-action="Index">Store</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categories
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Phones">Phones</a></li>
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Computers">Computers</a></li>
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Accessories">Accessories</a></li>
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Printers">Printers</a></li>
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Cameras">Cameras</a></li>
+                                <li><a class="dropdown-item" asp-controller="Store" asp-action="Index" asp-route-category="Other">Other</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark py-1" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                        </li>
+                    </ul>
+
+
+                    @using CityCenter.Services
+                    <ul class="navbar-nav me-2">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart4 text-danger h4"></i>
+                                <span id="CartSize" class="badge rounded-pill bg-danger" style="vertical-align: top">
+                                    @CartHelper.GetCartSize(Context.Request, Context.Response) 
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+
+
+
+                   
+
+                    @using Microsoft.AspNetCore.Identity
+                    @inject SignInManager<ApplicationUser> SignInManager
+                    @inject UserManager<ApplicationUser> UserManager
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var appUser = await UserManager.GetUserAsync(User);
+
+                        if (User.IsInRole("admin"))
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @(appUser!.FirstName + " " + appUser!.LastName + " (Admin)")
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="AdminOrders" asp-action="Index">Orders</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Users</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                        else if (User.IsInRole("client"))
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @(appUser!.FirstName + " " + appUser!.LastName + " (Client)")
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="ClientOrders" asp-action="Index">Orders</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">Profile</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {                        
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="btn btn-outline-dark mb-2 mb-sm-0 me-sm-2" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                        </ul>
+
+
+
+                    }
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    @if (ViewData["HomePage"] == null)
+    {
+        <div class="container mt-3">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+   
+
+
+    <footer class="py-0"> 
+         <div class="container"> 
+            <div class="d-lg-flex justify-content-between align-items-center py-0"> 
+               <div class="small mb-0 mb-lg-0"> 
+                    <p class="text-muted mb-0 me-5"><img src="/images/icon2.png" alt="" width="20" class="me-2" /> &copy; @DateTime.Now.Year - All rights reserved -<a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none text-black-50 ms-1">CityCenter -</a><a asp-area="" asp-controller="Home" asp-action="About" class="text-decoration-none text-black-50 ms-1">About Us</a></p> 
+                </div> 
+                <div class="d-flex small align-items-center justify-content-between"> 
+                    <div> 
+                         <a class="d-block d-lg-inline text-muted ms-lg-3 mb-1 mb-lg-0 text-decoration-none m-1" href="">Privacy Policy</a> <a class="d-block d-lg-inline text-muted ms-lg-3 mb-1 mb-lg-0 text-decoration-none m-1" href="">Terms</a> <a class="d-block d-lg-inline text-muted ms-lg-3 mb-1 mb-lg-0 text-decoration-none m-1" href="">Cookies</a> <a class="d-block d-lg-inline text-muted ms-lg-3 text-decoration-none m-1" href="">Sitemap</a>
+                     </div> 
+                     <div class="mx-auto d-flex justify-content-center flex-wrap "> 
+                        <a class="  d-flex justify-content-center align-items-center m-1" href="" style="width: 20px; height:20px"> 
+                            <svg class="bi bi-pinterest text-danger" fill="currentColor" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg"> 
+                                <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"></path> 
+                            </svg> 
+                         </a> 
+                         <a class="  d-flex justify-content-center align-items-center m-1" href="" style="width: 20px; height:20px"> 
+                             <svg class="bi bi-twitter text-primary" fill="currentColor" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg"> 
+                                 <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path> 
+                            </svg> 
+                        </a> 
+                        <a class="  d-flex justify-content-center align-items-center m-1" href="" style="width: 20px; height:20px"> 
+                            <svg class="bi bi-facebook text-primary" fill="currentColor" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg"> 
+                                 <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path> 
+                            </svg> 
+                        </a> 
+                    </div> 
+                 </div> 
+         </div>
+            <a href="#" id="backToTop" class="btn btn-outline-warning rounded-circle position-fixed bottom-0 end-0 m-4 d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; z-index: 1000;">
+                <i class="bi bi-arrow-up"></i>
+            </a>
+     </footer>
+
+  
+
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100; max-width: 100vw;">
+        <div id="cartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" style="max-width: 350px; width: calc(100vw - 2rem);">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle-fill me-2"></i> Added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

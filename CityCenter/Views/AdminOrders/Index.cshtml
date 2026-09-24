@@ -1,0 +1,107 @@
+﻿<h3 class="text-center mb-5 fw-bold text-dark">List of Orders</h3>
+
+<div class="card border rounded-4 shadow-sm">
+    <div class="table-responsive rounded-4">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+                <tr class="text-dark small text-uppercase  " style="background-color: #e9eef7 ;">
+                    <th class="ps-4 py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Id</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Client</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Units</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Total</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Payment Method</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Payment Status</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Order Status</th>
+                    <th class="py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Date</th>
+                    <th class="text-end pe-4 py-3 fw-semibold border-0" style="letter-spacing: 0.4px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Order order in ViewBag.Orders)
+                {
+                    int count = 0;
+                    decimal total = order.ShippingFee;
+                    foreach (OrderItem item in order.Items)
+                    {
+                        count += item.Quantity;
+                        total += item.Quantity * item.UnitPrice;
+                    }
+                    string paymentBadgeColor = "bg-danger";
+                    if (order.PaymentStatus == "pending")
+                    {
+                        paymentBadgeColor = "bg-warning text-dark";
+                    }
+                    else if (order.PaymentStatus == "accepted")
+                    {
+                        paymentBadgeColor = "bg-success";
+                    }
+                    else if (order.PaymentStatus == "canceled")
+                    {
+                        paymentBadgeColor = "bg-secondary";
+                    }
+                    string orderBadgeColor = "bg-danger";
+                    if (order.OrderStatus == "created")
+                    {
+                        orderBadgeColor = "bg-warning text-dark";
+                    }
+                    else if (order.OrderStatus == "accepted")
+                    {
+                        orderBadgeColor = "bg-success";
+                    }
+                    else if (order.OrderStatus == "canceled")
+                    {
+                        orderBadgeColor = "bg-secondary";
+                    }
+                    else if (order.OrderStatus == "shipped")
+                    {
+                        orderBadgeColor = "bg-primary";
+                    }
+                    else if (order.OrderStatus == "delivered")
+                    {
+                        orderBadgeColor = "bg-success";
+                    }
+                    else if (order.OrderStatus == "returned")
+                    {
+                        orderBadgeColor = "bg-info text-dark";
+                    }
+                    else if (order.OrderStatus == "deleted")
+                    {
+                        orderBadgeColor = "bg-dark";
+                    }
+                    <tr>
+                        <td class="ps-4 py-3 fw-medium">#@order.Id</td>
+                        <td class="text-secondary">@(order.Client.FirstName + " " + order.Client.LastName)</td>
+                        <td class="text-secondary">@count</td>
+                        <td class="fw-semibold">@(total)$</td>
+                        <td class="text-secondary">@order.PaymentMethod</td>
+                        <td><span class="badge rounded-pill @paymentBadgeColor bg-opacity-75 fw-normal px-3 py-2">@order.PaymentStatus</span></td>
+                        <td><span class="badge rounded-pill @orderBadgeColor bg-opacity-75 fw-normal px-3 py-2">@order.OrderStatus</span></td>
+                        <td class="text-nowrap text-secondary">@order.CreatedAt.ToString("MM/dd/yyyy")</td>
+                        <td class="text-end pe-4 py-3">
+                            <a class="btn btn-outline-dark btn-sm rounded-3" asp-controller="AdminOrders" asp-action="Details"
+                               asp-route-id="@order.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<nav class="mt-4">
+    <ul class="pagination justify-content-center flex-wrap">
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            string active = "";
+            string linkClass = "border border-dark text-dark";
+            if (i == ViewBag.PageIndex)
+            {
+                active = "active";
+                linkClass = "border border-dark bg-dark text-white";
+            }
+            <li class="page-item @active">
+                <a class="page-link rounded-3 mx-1 @linkClass" asp-route-pageIndex=@i>@i</a>
+            </li>
+        }
+    </ul>
+</nav>

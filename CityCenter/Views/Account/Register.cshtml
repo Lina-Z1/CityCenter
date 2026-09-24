@@ -1,0 +1,84 @@
+﻿@model RegisterDto
+@{
+}
+<div class="row">
+    <div class="col-11 col-md-8 col-lg-6 mx-auto rounded-4 border shadow-sm p-4 p-md-5 bg-white">
+        <div class="text-center mb-4">           
+            <h2 class="fw-bold mt-2 mb-1">Create an Account</h2>
+            <p class="text-secondary small mb-0">Join us and start shopping today</p>
+        </div>
+        <hr class="mb-4" />
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <form method="post">
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label class="form-label fw-medium">First Name*</label>
+                    <input class="form-control rounded-3" asp-for="FirstName">
+                    <span asp-validation-for="FirstName" class="text-danger small"></span>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label class="form-label fw-medium">Last Name*</label>
+                    <input class="form-control rounded-3" asp-for="LastName">
+                    <span asp-validation-for="LastName" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Email*</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-secondary"></i></span>
+                    <input class="form-control border-start-0 rounded-end-3" asp-for="Email">
+                </div>
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Phone</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-telephone text-secondary"></i></span>
+                    <input class="form-control border-start-0 rounded-end-3" asp-for="PhoneNumber">
+                </div>
+                <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-medium">Address*</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light border-end-0"><i class="bi bi-geo-alt text-secondary"></i></span>
+                    <input class="form-control border-start-0 rounded-end-3" asp-for="Address">
+                </div>
+                <span asp-validation-for="Address" class="text-danger small"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <label class="form-label fw-medium">Password*</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock text-secondary"></i></span>
+                        <input class="form-control border-start-0 rounded-end-3" type="password" asp-for="Password">
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger small"></span>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    <label class="form-label fw-medium">Confirm Password*</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-lock-fill text-secondary"></i></span>
+                        <input class="form-control border-start-0 rounded-end-3" type="password" asp-for="ConfirmPassword">
+                    </div>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                </div>
+            </div>
+
+            <div class="row g-2 mt-2">
+                <div class="col-12 col-sm-6 d-grid">
+                    <button type="submit" class="btn btn-dark rounded-3">Register</button>
+                </div>
+                <div class="col-12 col-sm-6 d-grid">
+                    <a class="btn btn-outline-dark rounded-3" asp-controller="Home" asp-action="Index" role="button">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

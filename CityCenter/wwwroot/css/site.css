@@ -1,0 +1,133 @@
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f8f9fa;
+}
+
+
+
+
+/*.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}*/
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.15rem rgba(33, 37, 41, 0.25);
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+
+.pagination .page-link {
+    color: #212529;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #212529;
+    border-color: #212529;
+    color: #fff;
+}
+/*
+.promo {
+    background-color: #e9e9eb;
+}
+*/
+
+.trust-item {
+    transition: transform 0.2s ease;
+}
+
+    .trust-item:hover {
+        transform: translateY(-5px);
+    }
+
+#backToTop:focus, .btn.shopNow:focus, .btn.shopNow:active:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-outline-dark.soft-hover:hover {
+    background-color: #c3c6c9;
+    color: #212529;
+    border-color: #212529;
+    box-shadow: none;
+    outline: none;
+
+}
+
+
+.icon-bounce, .icon-pulse, .icon-spin {
+    font-size: 1.1rem;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.badge:hover .icon-bounce {
+    animation: iconBounce 0.6s ease-in-out infinite;
+}
+
+.badge:hover .icon-pulse {
+    animation: iconPulse 0.8s ease-in-out infinite;
+}
+
+.badge:hover .icon-spin {
+    animation: iconSpin 1s linear infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(3px);
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.75;
+    }
+}
+
+@keyframes iconSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .badge:hover .icon-bounce,
+    .badge:hover .icon-pulse,
+    .badge:hover .icon-spin {
+        animation: none;
+    }
+}
