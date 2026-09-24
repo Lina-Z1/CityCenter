@@ -11,7 +11,7 @@
 ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
 
 ### 🔗 [**Visit Live Site →**](https://citycenterwebsite.runasp.net/)
-
+[![Live Demo](https://img.shields.io/badge/Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://citycenterwebsite.runasp.net/)
 ---
 
 ### 📖 Overview
