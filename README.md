@@ -1,4 +1,4 @@
- # 🖥️ City Center 
+ # City Center 
 <img width="1344" height="565" alt="cityCenter" src="https://github.com/user-attachments/assets/84fd45bc-4af6-41f9-b0c2-1eb344690a99" />
 
 
@@ -11,7 +11,7 @@
 
 ### 📖 Overview
 
-A full-featured electronics e-commerce web application built with **ASP.NET Core MVC**, featuring product browsing, cart management, user authentication, and an admin dashboard — designed with a clean, responsive Bootstrap 5 interface.
+A full-featured electronics e-commerce web application built with **ASP.NET Core MVC**, featuring product browsing, cart management, user authentication, and an admin dashboard . designed with a clean, responsive Bootstrap 5 interface.
  
 
 ## ✨ Features
