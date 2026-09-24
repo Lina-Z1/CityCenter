@@ -9,7 +9,7 @@
 
 ---
 
-## 📖 Overview
+### 📖 Overview
 
 A full-featured electronics e-commerce web application built with **ASP.NET Core MVC**, featuring product browsing, cart management, user authentication, and an admin dashboard — designed with a clean, responsive Bootstrap 5 interface.
 ---
