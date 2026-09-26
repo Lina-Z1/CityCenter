@@ -10,8 +10,8 @@
 ![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
 ![SQL Server](https://img.shields.io/badge/SQL_Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
 
-#### [![Live Demo](https://img.shields.io/badge/Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://citycenterwebsite.runasp.net/)
-
+ 
+[![Visit Website](https://img.shields.io/badge/Visit-Website-2ea44f?style=for-the-badge&logo=vercel&logoColor=white)](https://citycenterwebsite.runasp.net/)
 ---
 
 ### 📖 Overview
