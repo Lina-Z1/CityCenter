@@ -54,7 +54,7 @@ A full-featured electronics e-commerce web application built with **ASP.NET Core
 | ORM | Entity Framework Core |
 | Database | SQL Server |
 | Auth | ASP.NET Core Identity |
-| Frontend | Razor Views, Bootstrap 5, Bootstrap Icons |
+| Frontend | HTML, CSS, Bootstrap 5, Bootstrap Icons |
  
 
  
